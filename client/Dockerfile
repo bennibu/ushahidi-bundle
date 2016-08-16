@@ -1,6 +1,13 @@
 FROM node:6.3.1-wheezy
 
-RUN npm install -g http-server
+RUN apt-get update && \
+  apt-get install --no-install-recommends --no-install-suggests -y \
+    nginx-light && \
+  rm -rf /var/lib/apt/lists/* && \
+  ln -sf /dev/stdout /var/log/nginx/access.log && \
+	ln -sf /dev/stderr /var/log/nginx/error.log
+  
+COPY nginx-site.conf /etc/nginx/sites-available/default
 
 RUN git clone --depth 1 --branch master \
   https://github.com/ushahidi/platform-client /tmp/client
@@ -16,6 +23,6 @@ RUN cd /tmp/client && \
 
 COPY start.sh /
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["/start.sh"]
