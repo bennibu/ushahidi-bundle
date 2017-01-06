@@ -1,4 +1,4 @@
-FROM php:7.0.9-apache
+FROM php:7.0-apache
 
 RUN apt-get update && \
   apt-get install -y \
@@ -24,7 +24,11 @@ RUN apt-get update && \
 RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN git clone --depth 1 https://github.com/ushahidi/platform.git /var/www/html && \
+ENV PLATFORM_COMMIT_SHA 4b5af4543fd3087074c996af8445b0666f9e837b
+RUN git clone --depth 1 https://github.com/ushahidi/platform.git \
+      /var/www/html && \
+  cd /var/www/html && \
+  git checkout $PLATFORM_COMMIT_SHA && \
   mv httpdocs/template.htaccess httpdocs/.htaccess && \
   chmod 0777 application/logs application/cache application/media/uploads && \
   sed -i 's/var\/www\/html/var\/www\/html\/httpdocs/' /etc/apache2/sites-available/000-default.conf && \
