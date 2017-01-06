@@ -22,5 +22,4 @@ password 'admin'.
 
 ## You can do better
 
-- [ ] Set ushidi git revisions
 - [ ] Improve client build: Use another node container to build assets and copy them afterwards to tiny nginx alpine container.
