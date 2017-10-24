@@ -34,7 +34,7 @@ password 'admin'.
 
 
 ## NOTES.
-Be sure to set the ENV variable of the backend url to a public ip or url, accesible from your web browser.  Most of the rendering of the final web page, is made using JS, and inside your browser. So you need a public url, for this to work ok. You can modify the docker file or modify it, modify it in the docker directly or use another method. 
+Be sure to set the ENV variable of the backend url of the ushahidi-client to a public ip or url, accesible from your web browser.  Most of the rendering of the final web page, is made using JS, and inside your browser. So you need a public url, for this to work ok. You can modify the docker file, modify it in the docker command directly or use another method. 
 
 It is recommended to put and nginx, caddy, or other web server proxy for productions purposes. 
 
