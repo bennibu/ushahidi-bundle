@@ -1,4 +1,4 @@
-FROM node:6-wheezy
+FROM node:6.11.4-stretch
 
 RUN apt-get update && \
   apt-get install --no-install-recommends --no-install-suggests -y \
