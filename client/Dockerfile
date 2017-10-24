@@ -9,20 +9,24 @@ RUN apt-get update && \
 
 COPY nginx-site.conf /etc/nginx/sites-available/default
 
-ENV CLIENT_COMMIT_SHA 6209c6ea6ca5e24a52d4644419c434b491860f6f
-RUN git clone --depth 1 https://github.com/ushahidi/platform-client \
+ENV VERSION v3.7.1
+RUN git clone https://github.com/ushahidi/platform-client \
       /tmp/client && \
   cd /tmp/client && \
-  git checkout $CLIENT_COMMIT_SHA
+  git checkout tags/$VERSION && \
+  git checkout -b deploy 
+
 
 ENV BACKEND_URL="{{backend_url}}"
 RUN cd /tmp/client && \
   npm install && \
   npm install gulp && \
   node_modules/gulp/bin/gulp.js build && \
+  rm -r /var/www/* && \
   mv /tmp/client/server/www /var && \
   npm cache clean && \
   rm -rf /tmp/*
+
 
 COPY start.sh /
 
