@@ -27,6 +27,8 @@ services:
     ports:
       - 8081:80
     environment:
+      ## TAGs from the usahidi repo
+      VERSION: v3.7.1
       ## Change here to your backend ip address
       BACKEND_URL: http://localhost:8080/
       ### Your Transifex Username and password to Download Translations
