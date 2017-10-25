@@ -24,13 +24,15 @@ RUN apt-get update && \
 RUN curl -sS https://getcomposer.org/installer | \
       php -- --install-dir=/usr/local/bin --filename=composer
 
-ENV PLATFORM_COMMIT_SHA 4b5af4543fd3087074c996af8445b0666f9e837b
-RUN git clone --depth 1 https://github.com/ushahidi/platform.git \
+ENV VERSION v3.7.1
+RUN git clone https://github.com/ushahidi/platform.git \
       /var/www/html && \
   cd /var/www/html && \
-  git checkout $PLATFORM_COMMIT_SHA && \
+  git checkout tags/$VERSION && \
+  git checkout -b deploy && \
   mv httpdocs/template.htaccess httpdocs/.htaccess && \
   chmod 0777 application/logs application/cache application/media/uploads && \
   sed -i 's/var\/www\/html/var\/www\/html\/httpdocs/' /etc/apache2/sites-available/000-default.conf && \
   a2enmod rewrite && \
   ./bin/update --production --no-migrate
+
