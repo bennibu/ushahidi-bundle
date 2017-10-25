@@ -27,7 +27,13 @@ services:
     ports:
       - 8081:80
     environment:
+      ## Change here to your backend ip address
       BACKEND_URL: http://localhost:8080/
+      ### Your Transifex Username and password to Download Translations
+      TX_USERNAME=username
+      TX_PASSWORD=password
+      ## Languages to be available in ushahidi web. Comment to leave all languages
+      # APP_LANGUAGES=es,en,ar
 
 volumes:
   mariadb:
