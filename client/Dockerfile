@@ -14,7 +14,7 @@ COPY nginx-site.conf /etc/nginx/sites-available/default
 RUN git clone https://github.com/ushahidi/platform-client \
       /tmp/client && \
   cd /tmp/client && \
-  git checkout tags/$VERSION && \
+  git checkout $VERSION && \
   git checkout -b deploy 
  
 
